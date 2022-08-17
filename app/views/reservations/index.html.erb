@@ -1,0 +1,41 @@
+<% if flash[:notice] %>
+<p class = "notice"><%= flash[:notice] %></p>
+<% end %>
+
+<% if flash[:alert] %>
+<p class = "alert"><%= flash[:alert] %></p>
+<% end %>
+
+<h1 class="title">予約一覧(予約履歴)</h1>
+
+<table class="general-box">
+  <thead>
+    <tr>
+      <th>ルーム画像</th>
+      <th>ルーム名</th>
+      <th>ルーム紹介</th>
+      <th>合計料金</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>予約確定日時</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservations.each do |reservation| %>
+    <% if reservation.user_id == current_user.id %>
+    <tr>
+      <td>画像</td>
+      <td><%= link_to reservation.room.name, reservation.room %></td>
+      <td class="td-limit"><%= reservation.room.introduction %></td>
+      <td><%= reservation.total_fee %></td>
+      <td><%= reservation.start_date %></td>
+      <td><%= reservation.end_date %></td>
+      <td><%= reservation.created_at.to_s(:datetime_jp) %></td>
+    </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "ホーム画面に戻る", root_path, style: "margin:3%" %>

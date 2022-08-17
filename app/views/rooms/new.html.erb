@@ -1,0 +1,42 @@
+<% if flash[:notice] %>
+<p class = "notice"><%= flash[:notice] %></p>
+<% end %>
+
+<% if flash[:alert] %>
+<p class = "alert"><%= flash[:alert] %></p>
+<% end %>
+
+<h1 class="title">新規ルーム登録</h1>
+
+<!--登録フォーム--!>
+<%= form_with model: @room do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+  <table class="general-box">
+    <tr>
+      <th><span class="required">必須</span><%= f.label :name , "ルーム名" %></th>
+      <td><%= f.text_field :name, style: "width:100%" %></td>
+    </tr>
+  
+    <tr>
+      <th><span class="required">必須</span><%= f.label :introduction , "ルーム紹介" %></th>
+      <td><%= f.text_area :introduction, style: "height: 200px; width:100%" %></td>
+    </tr>
+  
+    <tr>
+      <th><span class="required">必須</span><%= f.label :fee , "料金" %></th>
+      <td><%= f.number_field :fee, style: "width:100%" %></td>
+    </tr>
+  
+    <tr>
+      <th><span class="required">必須</span><%= f.label :address , "住所" %></th>
+      <td><%= f.text_field :address, style: "width:100%" %></td>
+    </tr>
+  
+    <tr>
+      <th><%= f.label :image , "ルーム画像" %></th>
+      <td><%= f.file_field :image, style: "width:100%" %></td>
+    </tr>
+  </table>
+  
+  <%= f.submit "登録", class: "btn btn-primary roombtn" %>
+<% end %>

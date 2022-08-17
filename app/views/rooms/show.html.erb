@@ -1,0 +1,68 @@
+<% if flash[:notice] %>
+<p class = "notice"><%= flash[:notice] %></p>
+<% end %>
+
+<% if flash[:alert] %>
+<p class = "alert"><%= flash[:alert] %></p>
+<% end %>
+
+<h1 class="title">ルーム詳細</h1>
+
+<% if @room.image.present? %>
+<div class="room-image"><%= image_tag @room.image.url(:content) %></div>
+<% else %>
+<div class="image-alt">No Image</div>
+<% end %>
+
+<!--予約フォーム--!>
+<div class="rsv-box">
+  <%= form_with url: new_reservation_path do |f| %>
+  <%= f.hidden_field :room_id, value: @room.id %>
+
+  <div class="rsv-content">
+    <%= @room.fee %>円 / 日
+  </div>
+
+  <div class="rsv-content">
+    <%= f.label :start_date , "開始日" %><br />
+    <%= f.date_field :start_date, style: "width:80%" %>
+  </div>
+
+  <div class="rsv-content">
+  <%= f.label :end_date , "終了日" %><br />
+  <%= f.date_field :end_date, style: "width:80%" %>
+  </div>
+
+  <div class="rsv-content">
+  <%= f.label :how_many_people , "人数" %><br />
+  <%= f.number_field :how_many_people, style: "width:20%" %>
+  </div>
+  <% if user_signed_in? %>
+  <%= f.submit "予約する", class: "btn btn-primary rsv-btn" %>
+  <% else %>
+  <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary rsv-btn" %>
+  <% end %>
+  </div>
+<% end %>
+
+<table class="general-box">
+  <thead>
+    <tr>
+      <th>ルーム名</th>
+      <th>住所</th>
+      <th>ルーム紹介文</th>
+      <th>登録ユーザー名</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= @room.name %></td>
+      <td><%= @room.address %></td>
+      <td class="td-limit"><%= @room.introduction %></td>
+      <td><%= @room.user.name %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to "ホーム画面に戻る", root_path, style: "margin:3%" %>

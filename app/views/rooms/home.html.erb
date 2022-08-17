@@ -1,0 +1,24 @@
+<% if flash[:notice] %>
+<p class = "notice"><%= flash[:notice] %></p>
+<% end %>
+
+<% if flash[:alert] %>
+<p class = "alert"><%= flash[:alert] %></p>
+<% end %>
+
+<div class="background">
+  <div class="home-contents search">
+    <h1 class="home-title">PotepanShareでまだ体験したことのない旅をしよう</h1>
+    <%= search_form_for @search do |f| %>
+      <%= f.text_field :address_cont , placeholder: "エリア" , style: "width:100%; padding:5px; margin:5px;" %>
+      <%= f.submit "探す" , class: "btn btn-primary", style: "width:100%; padding:5px; margin:5px;" %>
+    <% end %>
+  </div>
+  <div class="home-contents reccomend">
+  <h2 class="hometitle">おすすめのエリア</h2>
+    <a class="location" href="http://localhost:3000/rooms?q%5Baddress_cont%5D=%E6%9D%B1%E4%BA%AC&commit=%E6%A4%9C%E7%B4%A2">東京</a>
+    <a class="location" href="http://localhost:3000/rooms?q%5Baddress_cont%5D=%E5%A4%A7%E9%98%AA&commit=%E6%A4%9C%E7%B4%A2">大阪</a>
+    <a class="location" href="http://localhost:3000/rooms?q%5Baddress_cont%5D=%E4%BA%AC%E9%83%BD&commit=%E6%A4%9C%E7%B4%A2">京都</a>
+    <a class="location" href="http://localhost:3000/rooms?q%5Baddress_cont%5D=%E6%9C%AD%E5%B9%8C&commit=%E6%A4%9C%E7%B4%A2">札幌</a>
+  </div>
+</div>
