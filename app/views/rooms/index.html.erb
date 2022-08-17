@@ -1,0 +1,31 @@
+<h1 class="title">ルーム一覧</h1>
+
+<table class="general-box">
+  <thead>
+    <tr>
+      <th>ルーム画像</th>
+      <th>ルーム名</th>
+      <th>ルーム紹介</th>
+      <th>料金</th>
+      <th>投稿日時</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+    <tr>
+      <% if room.image.present? %>
+      <td><%= image_tag room.image.url(:thumb) %></td>
+      <% else %>
+      <td>No Image</td>
+      <% end %>
+      <td><%= link_to room.name, room %></td>
+      <td class="td-limit"><%= room.introduction %></td>
+      <td><%= room.fee %>円/日</td>
+      <td><%= room.created_at.to_s(:datetime_jp) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "ホーム画面に戻る", root_path, style: "margin:3%" %>

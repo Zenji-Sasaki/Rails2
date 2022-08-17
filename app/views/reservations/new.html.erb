@@ -1,0 +1,41 @@
+<h1 class="title">予約内容確認</h1>
+
+<%= form_with model: @reservation do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+<%= f.hidden_field :room_id, value: @room.id %>
+
+  <table class="general-box">
+    <tr>
+      <th>費用</th>
+      <td>¥<%= @room.fee %> / 日</td>
+    </tr>
+  
+    <tr>
+      <th><%= f.label :start_date , "開始日" %></th>
+      <td><%= f.text_field :start_date, :readonly => true, style: "width:80%" %></td>
+    </tr>
+  
+    <tr>
+      <th><%= f.label :end_date , "終了日" %></th>
+      <td><%= f.text_field :end_date, :readonly => true, style: "width:80%" %></td>
+    </tr>
+
+    <tr>
+      <th>使用日数</th>
+      <td><%= @reservation.total_day %>日</td>
+    
+    </tr>
+  
+    <tr>
+      <th><%= f.label :how_meny_people , "人数" %></th>
+      <td><%= f.number_field :how_many_people, :readonly => true, style: "width:20%" %></td>
+    </tr>
+  
+    <tr>
+      <th><%= f.label :total_fee , "合計料金" %></th>
+      <td><%= f.text_field :total_fee, :readonly => true, style: "width:80%" %>円</td>
+    </tr>
+  </table>
+  <div class="reservation-message">上記内容でよろしければ「予約を確定」ボタンを押してください。</div>
+  <%= f.submit "予約を確定", class: "btn btn-primary roombtn" %>
+<% end %>
